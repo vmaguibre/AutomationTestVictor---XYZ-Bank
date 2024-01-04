@@ -16,9 +16,11 @@ describe('XYZ Bank', () => {
   it.only('CustomerPageTest', ()=>{
     //cy.visit("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
     login.goToCustumerLoginPage();
+    customer.verifyTittle();
     customer.verifyLabel();
     customer.verifyDefaultUserSelect();
     customer.verifyDisableLoginBtn();
+    customer.verifytUserSelectValues();
     customer.verifyEnableLoginBtn();
 
   })

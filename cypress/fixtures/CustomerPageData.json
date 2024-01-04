@@ -1,5 +1,5 @@
 {
-    "userSelect": "[---Your Name---,Hermoine Granger,Harry Potter,Albus Dumbledore,Neville Longbottom]",
+    "userSelect": "\n\t      ---Your Name--- \n\t      Hermoine GrangerHarry PotterRon WeaslyAlbus DumbledoreNeville Longbottom\n\t    ",
     "label":"Your Name :"
    
 }
