@@ -15,7 +15,7 @@ class Customer{
     verifyEnableLoginBtn(){
       cy.get('#userSelect').select('Hermoine Granger');
       cy.get("button[type='submit']").should('contain.text','Login')
-      .not('[disabled]');
+        .not('[disabled]');
     }
     //verifySelectElements
     //verifyHomeButton (Verify nav)
