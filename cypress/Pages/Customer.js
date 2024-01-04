@@ -1,10 +1,17 @@
+import Utilities from "../commons/Utilities.js";
+const utilities=new Utilities();
+
 class Customer{
     verifyTittle(){
       cy.get('.mainHeading').should('contain.text','XYZ Bank');
     }
     verifyLabel(){
-      cy.get('label').should('contain.text','Your Name :')
-    }
+      console.log(cy.get('label'));
+      utilities.getJsonElement('CustomerPageData','label','label');
+      }
+    //verifyDefaultUserSelect(){
+      //cy.get('#userSelect').should('contain.text','---Your Name---');
+    //}
     verifyDefaultUserSelect(){
       cy.get('#userSelect').should('contain.text','---Your Name---');
     }
