@@ -1,23 +1,33 @@
+import Utilities from "../commons/Utilities.js";
+const utilities=new Utilities();
+
 class Customer{
     verifyTittle(){
       cy.get('.mainHeading').should('contain.text','XYZ Bank');
     }
     verifyLabel(){
-      cy.get('label').should('contain.text','Your Name :')
-    }
-    verifyDefaultUserSelect(){
-      cy.get('#userSelect').should('contain.text','---Your Name---');
+      utilities.compareJsonElement('CustomerPageData','label','label');
     }
     verifyDisableLoginBtn(){
         cy.get("button[type='submit']").should('contain.text','Login')
         .not('[enabled]');
     }
-    verifyEnableLoginBtn(){
-      cy.get('#userSelect').select('Hermoine Granger');
-      cy.get("button[type='submit']").should('contain.text','Login')
-      .not('[disabled]');
+    verifyDefaultUserSelect(){
+      cy.get('#userSelect').should('contain.text','---Your Name---');
     }
-    //verifySelectElements
+    verifytUserSelectValues(){
+      utilities.compareJsonElement('CustomerPageData','userSelect','#userSelect')
+    }
+    // verifyEnableLoginBtn(){
+    //   cy.get('#userSelect').select('Hermoine Granger');
+    //   cy.get("button[type='submit']").should('contain.text','Login')
+    //     .not('[disabled]');
+    // }
+    verifyEnableLoginBtn(){
+      cy.get('#userSelect').select(1);
+      cy.get("button[type='submit']").should('contain.text','Login')
+        .not('[disabled]');
+    }
     //verifyHomeButton (Verify nav)
   }
   
