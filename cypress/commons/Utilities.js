@@ -1,6 +1,6 @@
 class JSON{
-    compareJsonElement(path,property,locator){
-        cy.fixture(path).then((json) => {
+    compareJsonElement(property,locator){
+        cy.fixture("TestData").then((json) => {
             cy.get(locator).should('contain.text',json[property]);
             // variable= json[property];
             // console.log("Variable: "+ typeof variable)

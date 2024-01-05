@@ -6,7 +6,8 @@ class Customer{
       cy.get('.mainHeading').should('contain.text','XYZ Bank');
     }
     verifyLabel(){
-      utilities.compareJsonElement('CustomerPageData','label','label');
+      //cy.get('.form-group label').should('contain.text',"Your Name :");
+      utilities.compareJsonElement('label','.form-group label');
     }
     verifyDisableLoginBtn(){
         cy.get("button[type='submit']").should('contain.text','Login')
@@ -16,7 +17,7 @@ class Customer{
       cy.get('#userSelect').should('contain.text','---Your Name---');
     }
     verifytUserSelectValues(){
-      utilities.compareJsonElement('CustomerPageData','userSelect','#userSelect')
+      utilities.compareJsonElement('userSelect','#userSelect')
     }
     // verifyEnableLoginBtn(){
     //   cy.get('#userSelect').select('Hermoine Granger');

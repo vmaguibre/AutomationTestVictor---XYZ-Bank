@@ -1,3 +1,4 @@
 Cambiar nombre Login
 Herencia Login > Manager
 Comparar mensaje de validacion
+Ingresar sin abrir la cuenta, validar mensaje

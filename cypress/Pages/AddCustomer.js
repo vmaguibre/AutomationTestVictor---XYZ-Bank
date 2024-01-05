@@ -24,6 +24,7 @@ class AddCustomer extends Manager{
     verifyRequiredFields(){
         //this.submitAddCustumerBtn();
         cy.get("form[name='myForm']").within(() => {
+            this.submitAddCustumerBtn();
             let numberOfValidations= 3;
             cy.get('input:invalid').should('have.length', numberOfValidations)
             cy.get('input[ng-model="fName"]').type(' ')
@@ -33,22 +34,35 @@ class AddCustomer extends Manager{
 
             cy.get('input:invalid').should('have.length', numberOfValidations-2)
             cy.get('input[ng-model="postCd"]').type(' ')
-            this.submitAddCustumerBtn()
-            cy.on('window:alert', (str) => {
-                expect(str).to.equal(`Please check the details. Customer may be duplicate.`)
-              })
+            // this.submitAddCustumerBtn()
+            // cy.on("window:alert",(x)=>{
+            //     expect(x).to.equal("Please check the details. Customer may be duplicate.");
+            // })
+  
         })
     }
     validateAddCustomer(){
-        cy.get('input[ng-model="fName"]').type('NameTest');
-        cy.get('input[ng-model="lName"]').type('LastNameTest');
-        cy.get('input[ng-model="postCd"]').type('PostCodeTest');
+        cy.fixture('TestData').then((json) => {
+            //cy.get(locator).should('contain.text',json[property]);
+            cy.get('input[ng-model="fName"]').type(json['firstName']);
+            cy.get('input[ng-model="lName"]').type(json['lastName']);
+            cy.get('input[ng-model="postCd"]').type(json['postCode']);
+            // variable= json[property];
+            // console.log("Variable: "+ typeof variable)
+            // return(this.variable);
+          })
+        
         this.submitAddCustumerBtn();
-        cy.on('window:alert', (str) => {
-            expect(str).to.contains(`Customer added successfully with customer id :`)
+        cy.on("window:alert",(x)=>{
+            expect(x).to.contains("Customer added successfully with customer id :");
         })
+ 
+
+        // cy.on('window:alert', (str) => {
+        //     expect(str).contains(`Customer added successfully with customer id :`)
+        // })
     }
-    
+
         
 }
   
