@@ -12,7 +12,7 @@ class Login{
   verifyBankManagerLoginBtn(){
     cy.get('button[ng-click="manager()"]').should('contain.text','Bank Manager Login');
   } 
-  goToCustumerLoginPage(){
+  goToCustomerLoginPage(){
     cy.get('button[ng-click="customer()"]').click();
   }  
   goToBankManagerLoginPage(){
