@@ -15,6 +15,12 @@ class ManageCustomers extends Manager{
         cy.get('td').contains('Delete Customer').exist;
         
     }
+    verifyUser(firstName,lastName,postCode){
+        cy.get('input[ng-model="searchCustomer"]').type(firstName);
+        cy.get('.table').contains('td',firstName).contains('td',lastName)
+            .contains(postCode);
+    }
+
     tableIsEmpty(){
         
     }
