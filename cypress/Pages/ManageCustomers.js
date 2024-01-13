@@ -1,21 +1,22 @@
 import Manager from "./Manager";
-class AddCustomer extends Manager{
-    verifyElementsAddCustomer(){
-        //First Name
-        cy.get("label").should('contain.text','First Name :').exist;
-        cy.get('input[ng-model="fName"]').invoke('attr', 'placeholder')
-            .should('contain', 'First Name').exist;
-        //Last Name
-        cy.get("label").should('contain.text','Last Name :').exist;
-        cy.get('input[ng-model="lName"]').invoke('attr', 'placeholder')
-            .should('contain', 'Last Name').exist;
-        //Post Code
-        cy.get("label").should('contain.text','Post Code :').exist;
-        cy.get('input[ng-model="postCd"]').invoke('attr', 'placeholder')
-            .should('contain', 'Post Code').exist;
-        //Add Customer Btn
-        cy.get("button[type='submit']").should('contain.text','Add Customer')
-            .exist;
+class ManageCustomers extends Manager{
+    verifyElementsManageCustomers(){
+        //Search Customer
+        cy.get('input[ng-model="searchCustomer"]').invoke('attr', 'placeholder')
+            .should('contain', 'Search Customer').exist;
+        //Customers table
+        cy.get(".table").exist;
+
+        //Table headers
+        cy.get('td').contains('First Name').exist;
+        cy.get('td').contains('Last Name').exist;
+        cy.get('td').contains('Post Code').exist;
+        cy.get('td').contains('Account Number').exist;
+        cy.get('td').contains('Delete Customer').exist;
+        
+    }
+    tableIsEmpty(){
+        
     }
     submitAddCustumerBtn(){
         cy.get("button[type='submit']").should('contain.text','Add Customer')
@@ -62,4 +63,4 @@ class AddCustomer extends Manager{
         
 }
   
-export default AddCustomer;
+export default ManageCustomers;
