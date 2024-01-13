@@ -3,7 +3,8 @@
     "label":"Your Name :",
     "firstName":"testName",
     "lastName":"testLastName",
-    "postCode":"testPostCode"
+    "postCode":"testPostCode",
+    "currency": "\n\t      \t\t---Currency--- \n\t      \t\tDollar\n\t      \t\tPound \n\t      \t\tRupee\n\t    \t"
 
 }
   

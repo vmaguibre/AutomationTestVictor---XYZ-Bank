@@ -3,12 +3,14 @@ import Customer from "../Pages/Customer.js";
 import AddCustomer from "../Pages/AddCustomer.js";
 import Manager from "../Pages/Manager.js";
 import ManagerCustomers from "../Pages/ManageCustomers.js";
+import OpenAccount from "../Pages/OpenAccount.js";
 describe('XYZ Bank', () => {
   const login=new Login();
   const customer=new Customer(); 
   const addCustomer=new AddCustomer(); 
   const manager=new Manager(); 
   const manageCustomer=new ManagerCustomers(); 
+  const openAccount=new OpenAccount(); 
 
 
   beforeEach(()=>{
@@ -63,6 +65,9 @@ describe('XYZ Bank', () => {
     manageCustomer.goToCustomers();
     manageCustomer.verifyElementsManageCustomers();
     manageCustomer.validateAddedCustomer();
+    //Open Accounts
+    openAccount.goToOpenAccount();
+    openAccount.verifyElementsOpenAccount();
 
   })
 })
