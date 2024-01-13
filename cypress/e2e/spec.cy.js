@@ -51,19 +51,18 @@ describe('XYZ Bank', () => {
     manager.verifyOptions();
 
   })
-    it.only('AddCustomerPageTest', ()=>{
+    it.only('BankManager', ()=>{
     //cy.visit("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
+    //'AddCustomerPageTest'
     login.goToBankManagerLoginPage();
     addCustomer.goToAddCustomer();
     addCustomer.verifyElementsAddCustomer();
     addCustomer.verifyRequiredFields();
     addCustomer.validateAddCustomer();
-
-  })
-  it.only('CustomersPageTest',()=>{
-    login.goToBankManagerLoginPage();
+    //'CustomersPageTest'
     manageCustomer.goToCustomers();
     manageCustomer.verifyElementsManageCustomers();
+    manageCustomer.validateAddedCustomer();
 
   })
 })

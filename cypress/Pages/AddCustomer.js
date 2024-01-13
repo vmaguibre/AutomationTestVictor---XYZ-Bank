@@ -48,15 +48,12 @@ class AddCustomer extends Manager{
         
         cy.fixture('TestData').then((json) => {
             let fistName=json['firstName'];
-            console.log(fistName);
-            let lastName=json['firstName'];
-            let postCode=json['firstName'];
+            let lastName=json['lastName'];
+            let postCode=json['postCode'];
             cy.get('input[ng-model="fName"]').type(fistName);
             cy.get('input[ng-model="lName"]').type(lastName);
             cy.get('input[ng-model="postCd"]').type(postCode);
             this.submitAddCustumerBtn();
-            manageCustomers.goToCustomers()
-            manageCustomers.verifyUser(fistName,lastName,postCode);
         })
         
         

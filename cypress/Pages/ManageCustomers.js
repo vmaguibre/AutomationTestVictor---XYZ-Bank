@@ -16,14 +16,20 @@ class ManageCustomers extends Manager{
         
     }
     verifyUser(firstName,lastName,postCode){
-        cy.get('input[ng-model="searchCustomer"]').type(firstName);
+        cy.get('input[ng-model="searchCustomer"]').clear().type(firstName);
+        cy.get('.table').contains('td',firstName);
+        cy.get('.table').contains('td',lastName);
+        cy.get('.table').contains('td',postCode);
+            
+    }
+    deleteUser(firstName,lastName,postCode){
+        cy.get('input[ng-model="searchCustomer"]').clear().type(firstName);
         cy.get('.table').contains('td',firstName).contains('td',lastName)
-            .contains(postCode);
+            .contains(postCode)
+            .get('button[ng-click="deleteCust(cust)"]').click();
+    
     }
-
-    tableIsEmpty(){
-        
-    }
+    
     submitAddCustumerBtn(){
         cy.get("button[type='submit']").should('contain.text','Add Customer')
         .click();
@@ -41,29 +47,12 @@ class ManageCustomers extends Manager{
 
             cy.get('input:invalid').should('have.length', numberOfValidations-2)
             cy.get('input[ng-model="postCd"]').type(' ')
-            // this.submitAddCustumerBtn()
-            // cy.on("window:alert",(x)=>{
-            //     expect(x).to.equal("Please check the details. Customer may be duplicate.");
-            // })
-  
         })
     }
-    validateAddCustomer(){
+    validateAddedCustomer(){
         cy.fixture('TestData').then((json) => {
-            cy.get('input[ng-model="fName"]').type(json['firstName']);
-            cy.get('input[ng-model="lName"]').type(json['lastName']);
-            cy.get('input[ng-model="postCd"]').type(json['postCode']);
+            this.verifyUser(json['firstName'],json['lastName'],json['postCode']);
           })
-        
-        this.submitAddCustumerBtn();
-        cy.on("window:alert",(x)=>{
-            expect(x).to.contains("Customer added successfully with customer id :");
-        })
- 
-
-        // cy.on('window:alert', (str) => {
-        //     expect(str).contains(`Customer added successfully with customer id :`)
-        // })
     }
 
         
