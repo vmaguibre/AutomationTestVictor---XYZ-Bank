@@ -1,4 +1,6 @@
 import Manager from "./Manager";
+import ManageCustomers from "./ManageCustomers";
+import { listenerCount } from "process";
 class AddCustomer extends Manager{
     verifyElementsAddCustomer(){
         //First Name
@@ -42,17 +44,19 @@ class AddCustomer extends Manager{
         })
     }
     validateAddCustomer(){
-        cy.fixture('TestData').then((json) => {
-            //cy.get(locator).should('contain.text',json[property]);
-            cy.get('input[ng-model="fName"]').type(json['firstName']);
-            cy.get('input[ng-model="lName"]').type(json['lastName']);
-            cy.get('input[ng-model="postCd"]').type(json['postCode']);
-            // variable= json[property];
-            // console.log("Variable: "+ typeof variable)
-            // return(this.variable);
-          })
+        let manageCustomers = new ManageCustomers();
         
-        this.submitAddCustumerBtn();
+        cy.fixture('TestData').then((json) => {
+            let fistName=json['firstName'];
+            let lastName=json['lastName'];
+            let postCode=json['postCode'];
+            cy.get('input[ng-model="fName"]').type(fistName);
+            cy.get('input[ng-model="lName"]').type(lastName);
+            cy.get('input[ng-model="postCd"]').type(postCode);
+            this.submitAddCustumerBtn();
+        })
+        
+        
         cy.on("window:alert",(x)=>{
             expect(x).to.contains("Customer added successfully with customer id :");
         })

@@ -2,11 +2,14 @@ import Login from "../Pages/Login.js";
 import Customer from "../Pages/Customer.js";
 import AddCustomer from "../Pages/AddCustomer.js";
 import Manager from "../Pages/Manager.js";
+import ManagerCustomers from "../Pages/ManageCustomers.js";
 describe('XYZ Bank', () => {
   const login=new Login();
   const customer=new Customer(); 
   const addCustomer=new AddCustomer(); 
   const manager=new Manager(); 
+  const manageCustomer=new ManagerCustomers(); 
+
 
   beforeEach(()=>{
     cy.visit("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
@@ -48,13 +51,18 @@ describe('XYZ Bank', () => {
     manager.verifyOptions();
 
   })
-    it.only('AddCustomerPageTest', ()=>{
+    it.only('BankManager', ()=>{
     //cy.visit("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
+    //'AddCustomerPageTest'
     login.goToBankManagerLoginPage();
     addCustomer.goToAddCustomer();
     addCustomer.verifyElementsAddCustomer();
     addCustomer.verifyRequiredFields();
     addCustomer.validateAddCustomer();
+    //'CustomersPageTest'
+    manageCustomer.goToCustomers();
+    manageCustomer.verifyElementsManageCustomers();
+    manageCustomer.validateAddedCustomer();
 
   })
 })

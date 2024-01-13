@@ -2,3 +2,27 @@ Cambiar nombre Login
 Herencia Login > Manager
 Comparar mensaje de validacion
 Ingresar sin abrir la cuenta, validar mensaje
+Verificar orden de la tabla Customers
+Verificar tabla Customers Vacia
+
+
+Base URL
+config
+  e2e: {
+    baseUrl: 'http://localhost:8080',
+  },
+
+cy.visit('/')
+
+
+    cy.request('POST', '/test/seed/post', {
+      title: 'First Post',
+      authorId: 1,
+      body: '...',
+    })
+
+    // we should be redirected to /dashboard
+    cy.url().should('include', '/dashboard')
+
+    // our auth cookie should be present
+    cy.getCookie('your-session-cookie').should('exist')
