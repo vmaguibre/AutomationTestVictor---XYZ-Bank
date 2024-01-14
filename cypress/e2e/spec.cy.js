@@ -65,9 +65,19 @@ describe('XYZ Bank', () => {
     manageCustomer.goToCustomers();
     manageCustomer.verifyElementsManageCustomers();
     manageCustomer.validateAddedCustomer();
+    //Validate unopen account
+    login.verifyHomeBtn();
+    login.goToCustomerLoginPage();
+    customer.customerLogin();
+    openAccount.validateUnopenAccount();
+    
+
     //Open Accounts
-    openAccount.goToOpenAccount();
-    openAccount.verifyElementsOpenAccount();
+    // login.verifyHomeBtn();
+    // login.goToBankManagerLoginPage();
+    // openAccount.goToOpenAccount();
+    // openAccount.verifyElementsOpenAccount();
+    // openAccount.verifyRequiredFields();
 
   })
 })

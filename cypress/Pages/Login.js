@@ -17,7 +17,8 @@ class Login{
   }  
   goToBankManagerLoginPage(){
     cy.get('button[ng-click="manager()"]').click();
-  }  
+  }
+  
 }
 
 export default Login;

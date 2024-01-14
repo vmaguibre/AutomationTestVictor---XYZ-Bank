@@ -16,38 +16,37 @@ class OpenAccount extends Manager{
         cy.get("button[type='submit']").should('contain.text','Process')
             .exist;
     }
-    submitAddCustumerBtn(){
-        cy.get("button[type='submit']").should('contain.text','Add Customer')
+    submitProcessBtn(){
+        cy.get("button[type='submit']").should('contain.text','Process')
         .click();
     }
-    verifyRequiredFields(){
-        //this.submitAddCustumerBtn();
-        cy.get("form[name='myForm']").within(() => {
-            this.submitAddCustumerBtn();
-            let numberOfValidations= 3;
-            cy.get('input:invalid').should('have.length', numberOfValidations)
-            cy.get('input[ng-model="fName"]').type(' ')
+    validateUnopenAccount(){
+        cy.fixture('TestData').then((json) => {
+            let firstName=json['firstName'];
+            let lastName=json['lastName'];
+            cy.get("div[class='ng-scope']")
+                .should('include.text','\n\t\n\t\tHome\n\t\tXYZ Bank\n\t\tLogout\n\t\t\n\t\n\t\n\t Welcome '+firstName+' '+ lastName+' !!\n\tPlease open an account with us.');
 
-            cy.get('input:invalid').should('have.length', numberOfValidations-1)
-            cy.get('input[ng-model="lName"]').type(' ')
-
-            cy.get('input:invalid').should('have.length', numberOfValidations-2)
-            cy.get('input[ng-model="postCd"]').type(' ')
-            // this.submitAddCustumerBtn()
-            // cy.on("window:alert",(x)=>{
-            //     expect(x).to.equal("Please check the details. Customer may be duplicate.");
-            // })
-  
         })
     }
-    validateAddCustomer(){
-        let manageCustomers = new ManageCustomers();
-        
+
+    verifyRequiredFields(){
+        cy.get("form[name='myForm']").within(() => {
+            this.submitProcessBtn();
+            let numberOfValidations= 1;
+            cy.get('#userSelect').should('have.length', numberOfValidations);
+            cy.get('#userSelect').select(1);
+
+            cy.get('#currency').should('have.length', numberOfValidations);
+            cy.get('#currency').select(1);
+        })
+    }
+    validateAddCustomer(){       
         cy.fixture('TestData').then((json) => {
-            let fistName=json['firstName'];
+            let firstName=json['firstName'];
             let lastName=json['lastName'];
             let postCode=json['postCode'];
-            cy.get('input[ng-model="fName"]').type(fistName);
+            cy.get('input[ng-model="fName"]').type(firstName);
             cy.get('input[ng-model="lName"]').type(lastName);
             cy.get('input[ng-model="postCd"]').type(postCode);
             this.submitAddCustumerBtn();
@@ -57,11 +56,6 @@ class OpenAccount extends Manager{
         cy.on("window:alert",(x)=>{
             expect(x).to.contains("Customer added successfully with customer id :");
         })
- 
-
-        // cy.on('window:alert', (str) => {
-        //     expect(str).contains(`Customer added successfully with customer id :`)
-        // })
     }
 
         
