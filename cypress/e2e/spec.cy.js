@@ -19,7 +19,7 @@ describe('XYZ Bank', () => {
     cy.visit("/");
   })
   it.only('LoginPageTest', ()=>{
-     login.verifyHomeTittle();
+    login.verifyHomeTittle();
     login.verifyHomeBtn();
     login.verifyCustomerLoginBtn();
     login.verifyBankManagerLoginBtn();
@@ -69,7 +69,6 @@ describe('XYZ Bank', () => {
     openAccount.verifyRequiredFields();
   })
   it.only('App', ()=>{
-    
     //'AddCustomerPageTest'
     login.goToBankManagerLoginPage();
     addCustomer.goToAddCustomer();
@@ -82,29 +81,38 @@ describe('XYZ Bank', () => {
     login.goToCustomerLoginPage();
     customer.customerLogin();
     openAccount.validateUnopenAccount();
-    
-
-    //Open Account
-    login.goToHomePage();
-    login.goToBankManagerLoginPage();
-    openAccount.goToOpenAccount();
+    // //Open Account
     login.goToHomePage();
     login.goToBankManagerLoginPage();
     openAccount.goToOpenAccount();
     openAccount.openAccount();
-
-    //Account
+    // //Account
     login.goToHomePage();
     login.goToCustomerLoginPage();
     customer.customerLogin();
     account.verifyAccountNumber();
     account.verifyBalance();
 
+    //Withdrawl
+    account.goToWithdrawl();
+    account.failWithdrawl(1000);
+
     //Deposit
+    login.goToHomePage();
+    login.goToCustomerLoginPage();
+    customer.customerLogin();
     account.goToDeposit();
-    account.deposit('2000')
+    account.deposit('2000');
+    account.verifyBalance();
+    //Withdrawl
+    account.goToWithdrawl();
+    account.withdrawl('500');
     account.verifyBalance();
     //
-    
+    login.logout();
+    login.goToHomePage();
+    login.goToBankManagerLoginPage();
+    manager.goToCustomers();
+    manageCustomer.deleteUser();
   })
 })
