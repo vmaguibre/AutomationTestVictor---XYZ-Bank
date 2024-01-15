@@ -1,6 +1,5 @@
 import Manager from "./Manager";
 import ManageCustomers from "./ManageCustomers";
-import { listenerCount } from "process";
 class AddCustomer extends Manager{
     verifyElementsAddCustomer(){
         //First Name
@@ -36,16 +35,10 @@ class AddCustomer extends Manager{
 
             cy.get('input:invalid').should('have.length', numberOfValidations-2)
             cy.get('input[ng-model="postCd"]').type(' ')
-            // this.submitAddCustumerBtn()
-            // cy.on("window:alert",(x)=>{
-            //     expect(x).to.equal("Please check the details. Customer may be duplicate.");
-            // })
   
         })
     }
-    validateAddCustomer(){
-        let manageCustomers = new ManageCustomers();
-        
+    addCustomer(){
         cy.fixture('TestData').then((json) => {
             let fistName=json['firstName'];
             let lastName=json['lastName'];
@@ -56,15 +49,10 @@ class AddCustomer extends Manager{
             this.submitAddCustumerBtn();
         })
         
-        
         cy.on("window:alert",(x)=>{
             expect(x).to.contains("Customer added successfully with customer id :");
         })
- 
 
-        // cy.on('window:alert', (str) => {
-        //     expect(str).contains(`Customer added successfully with customer id :`)
-        // })
     }
 
         

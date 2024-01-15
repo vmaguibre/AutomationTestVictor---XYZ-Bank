@@ -17,7 +17,13 @@ class Login{
   }  
   goToBankManagerLoginPage(){
     cy.get('button[ng-click="manager()"]').click();
-  }  
+  }
+  goToHomePage(){
+    cy.get('.btn.home').should('contain.text','Home').click();
+  }
+  logout(){
+    cy.get("button[ng-click='byebye()']").should('contain.text','Logout').click();
+  }
 }
 
 export default Login;

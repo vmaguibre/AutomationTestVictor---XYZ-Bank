@@ -22,11 +22,11 @@ class ManageCustomers extends Manager{
         cy.get('.table').contains('td',postCode);
             
     }
-    deleteUser(firstName,lastName,postCode){
-        cy.get('input[ng-model="searchCustomer"]').clear().type(firstName);
-        cy.get('.table').contains('td',firstName).contains('td',lastName)
-            .contains(postCode)
-            .get('button[ng-click="deleteCust(cust)"]').click();
+    deleteUser(){
+        cy.fixture('TestData').then((json) => {
+            cy.get('input[ng-model="searchCustomer"]').clear().type(json['firstName']);
+          })
+        cy.get('button[ng-click="deleteCust(cust)"]').click();
     
     }
     
@@ -35,7 +35,6 @@ class ManageCustomers extends Manager{
         .click();
     }
     verifyRequiredFields(){
-        //this.submitAddCustumerBtn();
         cy.get("form[name='myForm']").within(() => {
             this.submitAddCustumerBtn();
             let numberOfValidations= 3;

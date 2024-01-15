@@ -16,18 +16,20 @@ class Customer{
     verifyDefaultUserSelect(){
       cy.get('#userSelect').should('contain.text','---Your Name---');
     }
-    verifytUserSelectValues(){
-      utilities.compareJsonElement('userSelect','#userSelect')
-    }
-    // verifyEnableLoginBtn(){
-    //   cy.get('#userSelect').select('Hermoine Granger');
-    //   cy.get("button[type='submit']").should('contain.text','Login')
-    //     .not('[disabled]');
-    // }
     verifyEnableLoginBtn(){
       cy.get('#userSelect').select(1);
       cy.get("button[type='submit']").should('contain.text','Login')
         .not('[disabled]');
+    }
+    customerLogin(){
+      cy.fixture('TestData').then((json) => {
+        let fistName=json['firstName'];
+        let lastName=json['lastName'];
+        cy.get('#userSelect').select(fistName+" "+lastName);
+    })
+      cy.get("button[type='submit']").should('contain.text','Login')
+        .not('[disabled]').click();
+
     }
     //verifyHomeButton (Verify nav)
   }
