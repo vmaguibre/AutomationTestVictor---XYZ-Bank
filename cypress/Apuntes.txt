@@ -4,6 +4,7 @@ Comparar mensaje de validacion
 Ingresar sin abrir la cuenta, validar mensaje
 Verificar orden de la tabla Customers
 Verificar tabla Customers Vacia
+Validar la asignacion de numero de cuenta (Consecutivo)
 
 
 Base URL

@@ -5,6 +5,7 @@ const path = require('path');
 
 module.exports = defineConfig( {
   e2e: {
+    baseUrl: 'https://www.globalsqa.com/angularJs-protractor/BankingProject/',
     setupNodeEvents(on, config) {
       // implement node event listeners here
         on("task", {parseXlsx({ filePath }) {

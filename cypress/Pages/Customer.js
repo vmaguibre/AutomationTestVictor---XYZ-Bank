@@ -16,9 +16,6 @@ class Customer{
     verifyDefaultUserSelect(){
       cy.get('#userSelect').should('contain.text','---Your Name---');
     }
-    verifytUserSelectValues(){
-      utilities.compareJsonElement('userSelect','#userSelect')
-    }
     verifyEnableLoginBtn(){
       cy.get('#userSelect').select(1);
       cy.get("button[type='submit']").should('contain.text','Login')

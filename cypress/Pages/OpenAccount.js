@@ -41,22 +41,19 @@ class OpenAccount extends Manager{
             cy.get('#currency').select(1);
         })
     }
-    validateAddCustomer(){       
+    openAccount(){
         cy.fixture('TestData').then((json) => {
             let firstName=json['firstName'];
             let lastName=json['lastName'];
-            let postCode=json['postCode'];
-            cy.get('input[ng-model="fName"]').type(firstName);
-            cy.get('input[ng-model="lName"]').type(lastName);
-            cy.get('input[ng-model="postCd"]').type(postCode);
-            this.submitAddCustumerBtn();
+            cy.get('#userSelect').select(firstName+" "+lastName);
+            cy.get('#currency').select(1);
+            this.submitProcessBtn();
         })
-        
-        
         cy.on("window:alert",(x)=>{
-            expect(x).to.contains("Customer added successfully with customer id :");
+            expect(x).to.contains("Account created successfully with account Number :");
         })
     }
+
 
         
 }

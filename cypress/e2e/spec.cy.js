@@ -4,6 +4,7 @@ import AddCustomer from "../Pages/AddCustomer.js";
 import Manager from "../Pages/Manager.js";
 import ManagerCustomers from "../Pages/ManageCustomers.js";
 import OpenAccount from "../Pages/OpenAccount.js";
+import Account from "../Pages/Account.js";
 describe('XYZ Bank', () => {
   const login=new Login();
   const customer=new Customer(); 
@@ -11,14 +12,14 @@ describe('XYZ Bank', () => {
   const manager=new Manager(); 
   const manageCustomer=new ManagerCustomers(); 
   const openAccount=new OpenAccount(); 
+  const account=new Account(0); 
 
 
   beforeEach(()=>{
-    cy.visit("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
+    cy.visit("/");
   })
   it.only('LoginPageTest', ()=>{
-    //cy.visit("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
-    login.verifyHomeTittle();
+     login.verifyHomeTittle();
     login.verifyHomeBtn();
     login.verifyCustomerLoginBtn();
     login.verifyBankManagerLoginBtn();
@@ -35,49 +36,75 @@ describe('XYZ Bank', () => {
     })
   })
   it.only('CustomerPageTest', ()=>{
-    //cy.visit("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
     login.goToCustomerLoginPage();
     customer.verifyLabel();
     customer.verifyDefaultUserSelect();
     customer.verifyDisableLoginBtn();
-    customer.verifytUserSelectValues();
     customer.verifyEnableLoginBtn();
 
   })
 
   it.only('ManagerPageTest', ()=>{
-    //cy.visit("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
     login.goToBankManagerLoginPage();
     manager.verifyTittle
     manager.verifyHomeBtn();
     manager.verifyOptions();
-
   })
-    it.only('BankManager', ()=>{
-    //cy.visit("https://www.globalsqa.com/angularJs-protractor/BankingProject/");
-    //'AddCustomerPageTest'
+  it.only('AddCustomerPageTest', ()=>{
     login.goToBankManagerLoginPage();
     addCustomer.goToAddCustomer();
     addCustomer.verifyElementsAddCustomer();
     addCustomer.verifyRequiredFields();
-    addCustomer.validateAddCustomer();
-    //'CustomersPageTest'
+  })
+  it.only('ManagerCustomersPageTest', ()=>{
+    login.goToBankManagerLoginPage();
     manageCustomer.goToCustomers();
     manageCustomer.verifyElementsManageCustomers();
+  })
+  it.only('OpenAccountPageTest', ()=>{
+    login.goToHomePage();
+    login.goToBankManagerLoginPage();
+    openAccount.goToOpenAccount();
+    openAccount.verifyElementsOpenAccount();
+    openAccount.verifyRequiredFields();
+  })
+  it.only('App', ()=>{
+    
+    //'AddCustomerPageTest'
+    login.goToBankManagerLoginPage();
+    addCustomer.goToAddCustomer();
+    addCustomer.addCustomer();
+    //'CustomersPageTest'
+    manageCustomer.goToCustomers();
     manageCustomer.validateAddedCustomer();
     //Validate unopen account
-    login.verifyHomeBtn();
+    login.goToHomePage();
     login.goToCustomerLoginPage();
     customer.customerLogin();
     openAccount.validateUnopenAccount();
     
 
-    //Open Accounts
-    // login.verifyHomeBtn();
-    // login.goToBankManagerLoginPage();
-    // openAccount.goToOpenAccount();
-    // openAccount.verifyElementsOpenAccount();
-    // openAccount.verifyRequiredFields();
+    //Open Account
+    login.goToHomePage();
+    login.goToBankManagerLoginPage();
+    openAccount.goToOpenAccount();
+    login.goToHomePage();
+    login.goToBankManagerLoginPage();
+    openAccount.goToOpenAccount();
+    openAccount.openAccount();
 
+    //Account
+    login.goToHomePage();
+    login.goToCustomerLoginPage();
+    customer.customerLogin();
+    account.verifyAccountNumber();
+    account.verifyBalance();
+
+    //Deposit
+    account.goToDeposit();
+    account.deposit('2000')
+    account.verifyBalance();
+    //
+    
   })
 })
